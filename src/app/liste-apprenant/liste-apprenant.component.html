@@ -1,14 +1,27 @@
-<div class="card mb-3" style="max-width: 540px;">
-    <div class="row g-0">
-      <div class="col-md-4">
-        <img src="..." class="img-fluid rounded-start" alt="...">
-      </div>
-      <div class="col-md-8">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-          <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+
+<div class="container" >
+    <button class="btn btn-primary mt-4">ajouter</button>
+        <div class="card mb-3 mt-4" style="max-width: 540px;" >
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img src="https://t3.ftcdn.net/jpg/00/44/09/06/240_F_44090682_GFLjAi1bBk5MR2eJek4PFJSkzfFnX8vd.jpg" class="img-fluid rounded-start" alt="...">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body" *ngFor="let listepersonne of data">
+                  <h5 class="card-title">{{listepersonne.name}}</h5>
+                  <h5 class="card-title">{{listepersonne.firstname}}</h5>
+                  <h5 class="card-title">{{listepersonne.cin}}</h5>
+                  <h5 class="card-title">{{listepersonne.job}}</h5>
+                  <button class="btn btn-success me-4" (click)="modifierpersonne()">modifier</button>
+                  <button class="btn btn-danger">supprimer</button>
+                </div>
+              </div>
+            </div>
         </div>
-      </div>
-    </div>
+</div>
+
+
+  <div *ngIf="data">
+    <h1>Données récupérées :</h1>
+    <pre>{{ data | json }}</pre>
   </div>

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthentificationService } from '../services/authentification.service';
 
 @Component({
   selector: 'app-liste-apprenant',
@@ -7,4 +8,19 @@ import { Component } from '@angular/core';
 })
 export class ListeApprenantComponent {
 
+  data: any [] = [];
+
+  constructor(private dataService: AuthentificationService) {}
+
+  ngOnInit() {
+    this.dataService.getData().subscribe((result) => {
+      this.data = result;
+      console.log()
+      // Utilisez les données récupérées comme nécessaire
+    });
+  }
+  modifierpersonne(){
+    
+  }
 }
+

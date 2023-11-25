@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 import Swal from 'sweetalert2';
 import { Users } from '../models/model';
+import { AuthentificationService } from '../services/authentification.service';
 
 @Component({
   selector: 'app-authentification',
@@ -11,6 +12,9 @@ import { Users } from '../models/model';
 })
 export class AuthentificationComponent implements OnInit {
   contactUsers: Users[] = [];
+
+ 
+
 
   // Formes des objets du tableau 
   // {
