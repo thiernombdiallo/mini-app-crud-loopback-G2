@@ -1,19 +1,25 @@
 
+<div class="ajout m-5">
+  <button class="btn btn-primary mt-4">ajouter</button>
+
+</div>
+
 <div class="container" >
-    <button class="btn btn-primary mt-4">ajouter</button>
-        <div class="card mb-3 mt-4" style="max-width: 540px;" >
+        <div class="card mb-3 mt-4" style="max-width: 540px;" *ngFor="let listepersonne of personnes">
             <div class="row g-0">
-              <div class="col-md-4">
-                <img src="https://t3.ftcdn.net/jpg/00/44/09/06/240_F_44090682_GFLjAi1bBk5MR2eJek4PFJSkzfFnX8vd.jpg" class="img-fluid rounded-start" alt="...">
-              </div>
-              <div class="col-md-8">
-                <div class="card-body" *ngFor="let listepersonne of data">
-                  <h5 class="card-title">{{listepersonne.name}}</h5>
-                  <h5 class="card-title">{{listepersonne.firstname}}</h5>
-                  <h5 class="card-title">{{listepersonne.cin}}</h5>
-                  <h5 class="card-title">{{listepersonne.job}}</h5>
-                  <button class="btn btn-success me-4" (click)="modifierpersonne()">modifier</button>
-                  <button class="btn btn-danger">supprimer</button>
+              <div class="col-md-12">
+                <div class="card-body" >
+                <div class="img col-4">
+                  <img src="https://t3.ftcdn.net/jpg/00/44/09/06/240_F_44090682_GFLjAi1bBk5MR2eJek4PFJSkzfFnX8vd.jpg" class="img-fluid rounded-start" alt="...">
+                </div> 
+                  <div class="info col-8">
+                    <h5 class="card-title">{{listepersonne.name}}</h5>
+                    <h5 class="card-title">{{listepersonne.firstname}}</h5>
+                    <h5 class="card-title">{{listepersonne.cin}}</h5>
+                    <h5 class="card-title">{{listepersonne.job}}</h5>
+                    <button class="btn btn-success me-4" data-bs-toggle="modal" data-bs-target="#modalModifierPersonne">modifier</button>
+                    <button class="btn btn-danger">supprimer</button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -21,7 +27,60 @@
 </div>
 
 
-  <div *ngIf="data">
+
+<!-- Modal pour modifier un utilisateur-->
+<div class="modal fade" id="modalModifierPersonne" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+      <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Modifier Personne</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <div>
+              <label for="inputTitle" class="form-label">Name :</label>
+              <input type="text" name="name" class="form-control" id="inputTitle" aria-describedby="emailHelp">
+          </div>
+          <div class="mb-3">
+              <label for="inputDescription" class="form-label">First name :</label>
+              <input class="form-control" name="description" id="inputDescription" rows="3"  [(ngModel)] = "listepersonne.firstname">
+          </div>
+
+          <div class="mb-3">
+            <label for="inputDescription" class="form-label">CNI :</label>
+            <input class="form-control" name="cin" id="inputcni" rows="3"  [(ngModel)] = "listepersonne.cin">
+        </div>
+
+        <div class="mb-3">
+          <label for="inputDescription" class="form-label">First name :</label>
+          <input class="form-control" name="description" id="inputDescription" rows="3"  [(ngModel)] = "listepersonne.firstname">
+      </div>
+
+      <div class="mb-3">
+        <label for="inputDescription" class="form-label">job :</label>
+        <input class="form-control" name="job" id="inputjob" rows="3"  [(ngModel)] = "listepersonne.job">
+    </div>
+
+    <div class="mb-3">
+      <label for="inputDescription" class="form-label">path :</label>
+      <input class="form-control" name="path" id="inputpath" rows="3"  [(ngModel)] = "listepersonne.path">
+  </div>
+
+  <div class="mb-3">
+    <label for="inputDescription" class="form-label">age :</label>
+    <input class="form-control" name="age" id="inputage" rows="3"  [(ngModel)] = "listepersonne.firstname">
+</div>
+
+        </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-annuler" data-bs-dismiss="modal">Annuler</button>
+          <button type="button" class="btn btn-valider"  (click)="modifierUtilisateur(personnes)">Modifier</button>
+      </div>
+      </div>
+  </div>
+</div>
+
+  <div *ngIf="personnes">
     <h1>Données récupérées :</h1>
-    <pre>{{ data | json }}</pre>
+    <pre>{{ personnes | json }}</pre>
   </div>
