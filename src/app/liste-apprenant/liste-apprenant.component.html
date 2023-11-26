@@ -17,7 +17,8 @@
                     <h5 class="card-title">{{listepersonne.firstname}}</h5>
                     <h5 class="card-title">{{listepersonne.cin}}</h5>
                     <h5 class="card-title">{{listepersonne.job}}</h5>
-                    <button class="btn btn-success me-4" data-bs-toggle="modal" data-bs-target="#modalModifierPersonne">modifier</button>
+                    <h5 class="card-title">{{listepersonne.age}}</h5>
+                    <button class="btn btn-success me-4" data-bs-toggle="modal" data-bs-target="#modalModifierPersonne"  (click)="chargerInfosPersonne(listepersonne)" >modifier</button>
                     <button class="btn btn-danger">supprimer</button>
                   </div>
                 </div>
@@ -33,48 +34,49 @@
   <div class="modal-dialog">
       <div class="modal-content">
       <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Modifier Personne</h1>
+          <h1 class="modal-title fs-5" id="exampleModalLabel" >Modifier Personne</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
           <div>
               <label for="inputTitle" class="form-label">Name :</label>
-              <input type="text" name="name" class="form-control" id="inputTitle" aria-describedby="emailHelp">
+              <input type="text" name="name" class="form-control" id="inputTitle" aria-describedby="emailHelp"  [(ngModel)] = "name">
           </div>
           <div class="mb-3">
               <label for="inputDescription" class="form-label">First name :</label>
-              <input class="form-control" name="description" id="inputDescription" rows="3"  [(ngModel)] = "listepersonne.firstname">
+              <input class="form-control" name="description" id="inputDescription" rows="3"  [(ngModel)] = "firstname">
           </div>
 
           <div class="mb-3">
             <label for="inputDescription" class="form-label">CNI :</label>
-            <input class="form-control" name="cin" id="inputcni" rows="3"  [(ngModel)] = "listepersonne.cin">
+            <input class="form-control" name="cin" id="inputcni" rows="3"  [(ngModel)] = "cin">
         </div>
 
-        <div class="mb-3">
+        <!-- <div class="mb-3">
           <label for="inputDescription" class="form-label">First name :</label>
-          <input class="form-control" name="description" id="inputDescription" rows="3"  [(ngModel)] = "listepersonne.firstname">
-      </div>
+          <input class="form-control" name="description" id="inputDescription" rows="3"  [(ngModel)] = "firstname">
+      </div> -->
 
       <div class="mb-3">
         <label for="inputDescription" class="form-label">job :</label>
-        <input class="form-control" name="job" id="inputjob" rows="3"  [(ngModel)] = "listepersonne.job">
+        <input class="form-control" name="job" id="inputjob" rows="3"  [(ngModel)] = "job">
     </div>
 
     <div class="mb-3">
       <label for="inputDescription" class="form-label">path :</label>
-      <input class="form-control" name="path" id="inputpath" rows="3"  [(ngModel)] = "listepersonne.path">
+      <input class="form-control" name="path" id="inputpath" rows="3"  [(ngModel)] = "path">
   </div>
 
   <div class="mb-3">
     <label for="inputDescription" class="form-label">age :</label>
-    <input class="form-control" name="age" id="inputage" rows="3"  [(ngModel)] = "listepersonne.firstname">
+    <input class="form-control" name="age" id="inputage" rows="3"  [(ngModel)] = "age">
 </div>
 
         </div>
       <div class="modal-footer">
-          <button type="button" class="btn btn-annuler" data-bs-dismiss="modal">Annuler</button>
-          <button type="button" class="btn btn-valider"  (click)="modifierUtilisateur(personnes)">Modifier</button>
+          
+          <button type="button" class="btn btn-valider"  (click)="modifierPersonne()" data-bs-dismiss="modal" >Modifier</button>
+          <button type="button" class="btn btn-annuler" (click)="viderChapmsPersonne()">Annuler</button>
       </div>
       </div>
   </div>
