@@ -10,7 +10,7 @@ import Swal from 'sweetalert2';
   templateUrl: './liste-apprenant.component.html',
   styleUrls: ['./liste-apprenant.component.css']
 })
-export class ListeApprenantComponent {
+export class ListeApprenantComponent implements OnInit {
 // personnes: any;
 objectPersonne: any;
 personneModifier:any;
@@ -26,6 +26,11 @@ cin: any;
 // }
 
   personnes: any [] = [];
+  tabPersonne:any; 
+
+  // dataIdToDelete: string = '1'; // ID de l'élément à supprimer, à adapter selon ton cas
+ 
+
 
 
   constructor(private dataService: AuthentificationService,
@@ -38,6 +43,12 @@ cin: any;
       // Utilisez les données récupérées comme nécessaire
     });
     
+      // On récupère le tableau d'objets dans le localstorage
+      localStorage.setItem("Personnes", JSON.stringify(this.listepersonne));
+      this.tabPersonne = JSON.parse(localStorage.getItem("Personnes") || "[]");
+      if (!localStorage.getItem("Personnes")) {
+        
+      }
   }
 
 
@@ -93,12 +104,14 @@ cin: any;
     //   }
       // Création de l'objet contact 
       let listepersonne= {
-        // idContact: this.idLastContact + 1,
+        // idContact: this.listepersonne + 1,
         name: this.name,
         firstname: this.firstname,
-        emailContact: this.cin,
-        telephoneContact: this.job,
-        descriptionContact: this.path,
+        cin: this.cin,
+        job: this.job,
+        path: this.path,
+        age : this.age,
+         etatPersonne: 1,
           
       }
 
@@ -115,15 +128,44 @@ cin: any;
       // On vide les champs 
       this.viderChapmsPersonne();
       // On met à jour le tableau qui est stocké dans le localStorage 
-      localStorage.setItem("Users", JSON.stringify(this.personnes));
+      localStorage.setItem("Personnes", JSON.stringify(this.listepersonne));
+    //  return this.http.post<any>(`${this.apiUrl}/personnes`, personnes);
+    //   console.log(this.apiUrl);
+      
 
       console.log(this.personnes);
       // console.log(this.userConnect);
       // console.log(this.tabUsers);
     }
+
+    // supprimerPersonne(personnes:any){
+    //   Swal.fire({
+    //     title: "Etes-vous sur???",
+    //     text: "Vous allez supprimer le contact",
+    //     icon: "warning",
+    //     showCancelButton: true,
+    //     confirmButtonColor: "#3085d6",
+    //     cancelButtonColor: "#d33",
+    //     confirmButtonText: "Oui, je supprime!"
+    //   }).then((result) => {
+    //     if (result.isConfirmed) {
+    //       personnes.etatPersonne = 0;
+    //       // On met à jour le tableau qui est stocké dans le localStorage 
+    //       // localStorage.setItem("Users", JSON.stringify(this.tabUsers));
+    //       this.verifierChamps("personnes supprimer!", "", "success");     
+          
+    //     }
+    //   });
+    //   // alert(paramContact.etatContact);
+      
+    // }
   
-
-
+    // supprimerPersonne(): void {
+    //   this.dataService.supprimerPersonne(this.dataIdToDelete).subscribe(deleted => {
+    //     console.log('Donnée supprimée avec succès');
+    //     // Réalise des actions nécessaires après la suppression
+    //   });
+    // }
  modifierPersonne(){
     this.personneModifier.name = this.name;
     this.personneModifier.firstname = this.firstname;
@@ -142,33 +184,31 @@ cin: any;
     // this.verifierChamps("Mofication réussie!", "", "success"); 
     // this.viderChapmsContact();
   } 
-}
-// export class ListeApprenantComponent implements OnInit {
-//   data?: Personne[];
-//   objetAmodifier!: Personne;
-//   !: Personne;
-// // personnes: Personne;
 
-//   constructor(private authService: AuthentificationService) {}
 
-//   ngOnInit(): void {
-//     this.loadData();
-//   }
+  
 
-//   loadData(): void {
-//     this.authService.getData().subscribe(
-//       (data: Personne[]) => {
-//         this.data = data;
-//       },
-//       (error) => {
-//         console.error('Une erreur s\'est produite lors du chargement des données :', error);
-//       }
-//     );
-//   }
-
-//   modifierUtilisateur(personne: Personne): void {
-//     this.objetAmodifier = personne;
-//     // Réinitialiser le formulaire ou effectuer d'autres actions si nécessaire
+  // Methode supprimer utlisateur 
+  supprimerPersonne(personnes:any){
+    Swal.fire({
+      title: "Etes-vous sur???",
+      text: "Vous allez supprimer le contact",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Oui, je supprime!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        personnes.etatpersonne = 0;
+        // // On met à jour le tableau qui est stocké dans le localStorage 
+        // localStorage.setItem("Users", JSON.stringify(this.tabUsers));
+        // this.verifierChamps("Contact supprimer!", "", "success");     
+        
+      }
+    });
+    // alert(paramContact.etatContact);
+    
 //   }
 
 //   validerModification(): void {
@@ -187,3 +227,5 @@ cin: any;
 // }
 
 
+  }
+}
